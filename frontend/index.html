@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventario de Tecnología</title>
+  
+  <!-- Google Font: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome para iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header>
+    <h1><i class="fas fa-laptop-code"></i> Inventario de Tecnología</h1>
+  </header>
+
+  <main>
+    <section id="formularios">
+      <h2>📋 Registro de Datos</h2>
+
+      <form id="form-categoria">
+        <h3>🗂️ Nueva Categoría</h3>
+        <input type="text" name="nombre" placeholder="Nombre categoría" required />
+        <button type="submit"><i class="fas fa-save"></i> Guardar Categoría</button>
+      </form>
+
+      <form id="form-proveedor">
+        <h3>🏢 Nuevo Proveedor</h3>
+        <input type="text" name="nombre" placeholder="Nombre proveedor" required />
+        <input type="text" name="telefono" placeholder="Teléfono" />
+        <input type="email" name="email" placeholder="Email" />
+        <button type="submit"><i class="fas fa-save"></i> Guardar Proveedor</button>
+      </form>
+
+      <form id="form-producto">
+        <h3>📦 Nuevo Producto</h3>
+        <input type="text" name="nombre" placeholder="Nombre producto" required />
+        <input type="text" name="descripcion" placeholder="Descripción" />
+        <input type="number" name="precio" placeholder="Precio" required />
+        <input type="number" name="stock" placeholder="Stock inicial" required />
+        <select name="categoria_id" id="categoria_id" required></select>
+        <select name="proveedor_id" id="proveedor_id" required></select>
+        <button type="submit"><i class="fas fa-save"></i> Guardar Producto</button>
+      </form>
+
+      <form id="form-compra">
+        <h3>➕ Registrar Compra</h3>
+        <select name="producto_id" id="producto_id" required></select>
+        <input type="number" name="cantidad" placeholder="Cantidad" required />
+        <select name="cliente" id="cliente_proveedor" required></select>
+        <button type="submit"><i class="fas fa-arrow-down"></i> Registrar Compra</button>
+      </form>
+
+      <form id="form-venta">
+        <h3>💸 Registrar Venta</h3>
+        <select name="producto_id" id="venta_producto_id" required></select>
+        <input type="number" name="cantidad" placeholder="Cantidad" required />
+        <input type="text" name="cliente" placeholder="Nombre del cliente" required />
+        <button type="submit"><i class="fas fa-arrow-down"></i> Registrar Venta</button>
+      </form>
+    </section>
+
+    <section id="consultas">
+      <h2>🔎 Consultas y Reportes</h2>
+      <button onclick="cargarProductos()"><i class="fas fa-boxes"></i> Ver Productos</button>
+      <button onclick="cargarMasVendidos()"><i class="fas fa-fire"></i> Productos Más Vendidos</button>
+      <button onclick="cargarStockProveedor()"><i class="fas fa-truck-loading"></i> Stock por Proveedor</button>
+      <button onclick="cargarStockBajo()"><i class="fas fa-exclamation-triangle"></i> Stock Bajo</button>
+      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+        <button onclick="cargarVentasMensuales()"><i class="fas fa-calendar-alt"></i> Compras Totales </button>
+        <label for="mes_filtrado">Filtrar por mes:</label>
+        <section>
+          <input type="month" id="mes_filtrado" />
+        </section>
+        <button onclick="cargarVentasMensualesFiltradas()"><i class="fas fa-filter"></i> Filtrar</button>
+      </div>
+    </section>
+
+    <section id="tablas">
+      <h2>📊 Resultados</h2>
+      <table id="tabla-productos">
+        <thead><tr></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>📄 Historial de Ventas</h2>
+      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+        <button onclick="cargarHistorialVentas()"><i class="fas fa-history"></i> Ver Todo el Historial</button>
+        <label for="mes_historial">Filtrar por mes:</label>
+        <section>
+          <input type="month" id="mes_historial" />
+        </section>
+        <button onclick="cargarHistorialVentasFiltrado()"><i class="fas fa-filter"></i> Filtrar</button>
+      </div>
+      <table id="tabla-ventas">
+        <thead><tr></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </main>
+
+      
+
+  <div id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+</body>
+</html>

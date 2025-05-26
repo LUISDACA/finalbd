@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f1f5f9;
+  color: #1f2937;
+  padding: 40px 20px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #111827;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h2, h3 {
+  color: #1f2937;
+  margin-bottom: 12px;
+}
+
+section {
+  margin-bottom: 40px;
+}
+
+form {
+  background-color: #ffffff;
+  padding: 24px;
+  margin-bottom: 25px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  transition: transform 0.2s ease;
+}
+
+form:hover {
+  transform: translateY(-2px);
+}
+
+input, select, button {
+  display: block;
+  width: 100%;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  font-size: 15px;
+  background-color: #f9fafb;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+  background-color: white;
+}
+
+button {
+  background-color: #3b82f6;
+  color: white;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+button:hover {
+  background-color: #2563eb;
+}
+
+section button {
+  display: inline-block;
+  width: auto;
+  margin-right: 12px;
+  margin-top: 8px;
+  padding: 10px 18px;
+  font-size: 14px;
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  margin-top: 30px;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+}
+
+th, td {
+  padding: 14px 20px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+th {
+  background-color: #1f2937;
+  color: white;
+  font-weight: 600;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+tbody tr:hover {
+  background-color: #e0f2fe;
+}
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #1f2937;
+  color: #fff;
+  padding: 14px 22px;
+  border-radius: 10px;
+  font-size: 14px;
+  opacity: 0.95;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.toast-success {
+  background-color: #22c55e;
+}
+
+.toast-error {
+  background-color: #ef4444;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 0.95;
+    transform: translateY(0);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    padding: 20px 12px;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  form, table {
+    font-size: 14px;
+  }
+
+  input, select, button {
+    font-size: 14px;
+  }
+}
