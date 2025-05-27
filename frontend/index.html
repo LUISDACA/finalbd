@@ -1,114 +1,410 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inventario de Tecnología</title>
+  <title>Sistema de Inventario Tecnológico</title>
   
-  <!-- Google Font: Inter -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-
   <!-- Font Awesome para iconos -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-  <!-- Estilos -->
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <!-- Estilos personalizados -->
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header>
-    <h1><i class="fas fa-laptop-code"></i> Inventario de Tecnología</h1>
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <i class="fas fa-microchip"></i>
+          <span>TechInventory Pro</span>
+        </div>
+        <nav class="nav-tabs">
+          <button class="nav-tab active" data-tab="dashboard">
+            <i class="fas fa-chart-pie"></i> Dashboard
+          </button>
+          <button class="nav-tab" data-tab="forms">
+            <i class="fas fa-plus-circle"></i> Registro
+          </button>
+          <button class="nav-tab" data-tab="reports">
+            <i class="fas fa-chart-bar"></i> Reportes
+          </button>
+          <button class="nav-tab" data-tab="purchases">
+            <i class="fas fa-shopping-bag"></i> Compras
+          </button>
+          <button class="nav-tab" data-tab="sales">
+            <i class="fas fa-receipt"></i> Ventas
+          </button>
+        </nav>
+      </div>
+    </div>
   </header>
 
-  <main>
-    <section id="formularios">
-      <h2>📋 Registro de Datos</h2>
+  <main class="main">
+    <div class="container">
+      <!-- Dashboard Tab -->
+      <div class="tab-content active" id="dashboard">
+        <h1 class="page-title">Dashboard</h1>
+        <p class="page-subtitle">Resumen general del inventario y actividad del sistema</p>
 
-      <form id="form-categoria">
-        <h3>🗂️ Nueva Categoría</h3>
-        <input type="text" name="nombre" placeholder="Nombre categoría" required />
-        <button type="submit"><i class="fas fa-save"></i> Guardar Categoría</button>
-      </form>
+        <div class="stats-grid">
+          <div class="stat-card primary">
+            <div class="stat-header">
+              <div class="stat-icon primary">
+                <i class="fas fa-boxes"></i>
+              </div>
+            </div>
+            <div class="stat-number" id="total-productos">0</div>
+            <div class="stat-label">Total Productos</div>
+          </div>
+          
+          <div class="stat-card success">
+            <div class="stat-header">
+              <div class="stat-icon success">
+                <i class="fas fa-chart-line"></i>
+              </div>
+            </div>
+            <div class="stat-number" id="total-ventas">0</div>
+            <div class="stat-label">Ventas Hoy</div>
+          </div>
+          
+          <div class="stat-card warning">
+            <div class="stat-header">
+              <div class="stat-icon warning">
+                <i class="fas fa-exclamation-triangle"></i>
+              </div>
+            </div>
+            <div class="stat-number" id="stock-bajo">0</div>
+            <div class="stat-label">Stock Bajo</div>
+          </div>
+          
+          <div class="stat-card info">
+            <div class="stat-header">
+              <div class="stat-icon info">
+                <i class="fas fa-tags"></i>
+              </div>
+            </div>
+            <div class="stat-number" id="total-categorias">0</div>
+            <div class="stat-label">Categorías</div>
+          </div>
+        </div>
 
-      <form id="form-proveedor">
-        <h3>🏢 Nuevo Proveedor</h3>
-        <input type="text" name="nombre" placeholder="Nombre proveedor" required />
-        <input type="text" name="telefono" placeholder="Teléfono" />
-        <input type="email" name="email" placeholder="Email" />
-        <button type="submit"><i class="fas fa-save"></i> Guardar Proveedor</button>
-      </form>
-
-      <form id="form-producto">
-        <h3>📦 Nuevo Producto</h3>
-        <input type="text" name="nombre" placeholder="Nombre producto" required />
-        <input type="text" name="descripcion" placeholder="Descripción" />
-        <input type="number" name="precio" placeholder="Precio" required />
-        <input type="number" name="stock" placeholder="Stock inicial" required />
-        <select name="categoria_id" id="categoria_id" required></select>
-        <select name="proveedor_id" id="proveedor_id" required></select>
-        <button type="submit"><i class="fas fa-save"></i> Guardar Producto</button>
-      </form>
-
-      <form id="form-compra">
-        <h3>➕ Registrar Compra</h3>
-        <select name="producto_id" id="producto_id" required></select>
-        <input type="number" name="cantidad" placeholder="Cantidad" required />
-        <select name="cliente" id="cliente_proveedor" required></select>
-        <button type="submit"><i class="fas fa-arrow-down"></i> Registrar Compra</button>
-      </form>
-
-      <form id="form-venta">
-        <h3>💸 Registrar Venta</h3>
-        <select name="producto_id" id="venta_producto_id" required></select>
-        <input type="number" name="cantidad" placeholder="Cantidad" required />
-        <input type="text" name="cliente" placeholder="Nombre del cliente" required />
-        <button type="submit"><i class="fas fa-arrow-down"></i> Registrar Venta</button>
-      </form>
-    </section>
-
-    <section id="consultas">
-      <h2>🔎 Consultas y Reportes</h2>
-      <button onclick="cargarProductos()"><i class="fas fa-boxes"></i> Ver Productos</button>
-      <button onclick="cargarMasVendidos()"><i class="fas fa-fire"></i> Productos Más Vendidos</button>
-      <button onclick="cargarStockProveedor()"><i class="fas fa-truck-loading"></i> Stock por Proveedor</button>
-      <button onclick="cargarStockBajo()"><i class="fas fa-exclamation-triangle"></i> Stock Bajo</button>
-      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-        <button onclick="cargarVentasMensuales()"><i class="fas fa-calendar-alt"></i> Compras Totales </button>
-        <label for="mes_filtrado">Filtrar por mes:</label>
-        <section>
-          <input type="month" id="mes_filtrado" />
-        </section>
-        <button onclick="cargarVentasMensualesFiltradas()"><i class="fas fa-filter"></i> Filtrar</button>
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">
+              <i class="fas fa-inventory"></i>
+              Inventario General
+            </h2>
+          </div>
+          <div class="card-body">
+            <div class="table-container">
+              <table class="table" id="tabla-productos">
+                <thead>
+                  <tr></tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
-    </section>
 
-    <section id="tablas">
-      <h2>📊 Resultados</h2>
-      <table id="tabla-productos">
-        <thead><tr></tr></thead>
-        <tbody></tbody>
-      </table>
-    </section>
+      <!-- Forms Tab -->
+      <div class="tab-content" id="forms">
+        <h1 class="page-title">Registro de Datos</h1>
+        <p class="page-subtitle">Agregar nuevos elementos al sistema</p>
 
-    <section>
-      <h2>📄 Historial de Ventas</h2>
-      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-        <button onclick="cargarHistorialVentas()"><i class="fas fa-history"></i> Ver Todo el Historial</button>
-        <label for="mes_historial">Filtrar por mes:</label>
-        <section>
-          <input type="month" id="mes_historial" />
-        </section>
-        <button onclick="cargarHistorialVentasFiltrado()"><i class="fas fa-filter"></i> Filtrar</button>
+        <div class="form-grid">
+          <!-- Categoría Form -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">
+                <i class="fas fa-folder"></i>
+                Nueva Categoría
+              </h3>
+            </div>
+            <div class="card-body">
+              <form id="form-categoria">
+                <div class="form-group">
+                  <label class="form-label">Nombre de la Categoría</label>
+                  <input type="text" name="nombre" class="form-input" placeholder="Ej: Laptops, Smartphones..." required>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-save"></i>
+                  Guardar Categoría
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Proveedor Form -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">
+                <i class="fas fa-truck"></i>
+                Nuevo Proveedor
+              </h3>
+            </div>
+            <div class="card-body">
+              <form id="form-proveedor">
+                <div class="form-group">
+                  <label class="form-label">Nombre del Proveedor</label>
+                  <input type="text" name="nombre" class="form-input" placeholder="Nombre de la empresa" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Teléfono</label>
+                  <input type="tel" name="telefono" class="form-input" placeholder="+57 300 123 4567">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Email</label>
+                  <input type="email" name="email" class="form-input" placeholder="contacto@empresa.com">
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-save"></i>
+                  Guardar Proveedor
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Producto Form -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">
+                <i class="fas fa-box"></i>
+                Nuevo Producto
+              </h3>
+            </div>
+            <div class="card-body">
+              <form id="form-producto">
+                <div class="form-group">
+                  <label class="form-label">Nombre del Producto</label>
+                  <input type="text" name="nombre" class="form-input" placeholder="Nombre del producto" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Descripción</label>
+                  <input type="text" name="descripcion" class="form-input" placeholder="Descripción detallada">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Precio ($)</label>
+                  <input type="number" name="precio" class="form-input" placeholder="0.00" step="0.01" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Stock Inicial</label>
+                  <input type="number" name="stock" class="form-input" placeholder="0" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Categoría</label>
+                  <select name="categoria_id" id="categoria_id" class="form-select" required>
+                    <option value="">Seleccionar categoría...</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Proveedor</label>
+                  <select name="proveedor_id" id="proveedor_id" class="form-select" required>
+                    <option value="">Seleccionar proveedor...</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-save"></i>
+                  Guardar Producto
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Compra Form -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">
+                <i class="fas fa-arrow-down"></i>
+                Registrar Compra
+              </h3>
+            </div>
+            <div class="card-body">
+              <form id="form-compra">
+                <div class="form-group">
+                  <label class="form-label">Producto</label>
+                  <select name="producto_id" id="producto_id" class="form-select" required>
+                    <option value="">Seleccionar producto...</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Cantidad</label>
+                  <input type="number" name="cantidad" class="form-input" placeholder="0" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Proveedor</label>
+                  <select name="cliente" id="cliente_proveedor" class="form-select" required>
+                    <option value="">Seleccionar proveedor...</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-success">
+                  <i class="fas fa-plus"></i>
+                  Registrar Compra
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Venta Form -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">
+                <i class="fas fa-shopping-cart"></i>
+                Registrar Venta
+              </h3>
+            </div>
+            <div class="card-body">
+              <form id="form-venta">
+                <div class="form-group">
+                  <label class="form-label">Producto</label>
+                  <select name="producto_id" id="venta_producto_id" class="form-select" required>
+                    <option value="">Seleccionar producto...</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Cantidad</label>
+                  <input type="number" name="cantidad" class="form-input" placeholder="0" min="1" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Cliente</label>
+                  <input type="text" name="cliente" class="form-input" placeholder="Nombre del cliente" required>
+                </div>
+                <button type="submit" class="btn btn-success">
+                  <i class="fas fa-cash-register"></i>
+                  Registrar Venta
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
-      <table id="tabla-ventas">
-        <thead><tr></tr></thead>
-        <tbody></tbody>
-      </table>
-    </section>
+
+      <!-- Reports Tab -->
+      <div class="tab-content" id="reports">
+        <h1 class="page-title">Reportes</h1>
+        <p class="page-subtitle">Análisis de productos y estadísticas del inventario</p>
+
+        <div class="action-grid">
+          <button class="btn btn-info" onclick="cargarMasVendidos()">
+            <i class="fas fa-fire"></i>
+            Más Vendidos
+          </button>
+          <button class="btn btn-warning" onclick="cargarStockProveedor()">
+            <i class="fas fa-warehouse"></i>
+            Stock por Proveedor
+          </button>
+          <button class="btn btn-secondary" onclick="cargarStockBajo()">
+            <i class="fas fa-exclamation-triangle"></i>
+            Stock Bajo
+          </button>
+          <button class="btn btn-outline" onclick="cargarProductos('tabla-reportes')">
+            <i class="fas fa-boxes"></i>
+            Ver Todos los Productos
+          </button>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">
+              <i class="fas fa-chart-bar"></i>
+              Resultados del Reporte
+            </h2>
+          </div>
+          <div class="card-body">
+            <div class="table-container">
+              <table class="table" id="tabla-reportes">
+                <thead>
+                  <tr></tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Purchases Tab -->
+      <div class="tab-content" id="purchases">
+        <h1 class="page-title">Compras Mensuales</h1>
+        <p class="page-subtitle">Gestión y análisis de compras por período</p>
+
+        <div class="action-grid">
+          <button class="btn btn-primary" onclick="cargarVentasMensuales()">
+            <i class="fas fa-calendar"></i>
+            Ver Todas las Compras
+          </button>
+        </div>
+
+        <div class="filter-section">
+          <label>Filtrar por mes:</label>
+          <input type="month" id="mes_filtrado" class="form-input" style="width: auto;">
+          <button class="btn btn-sm btn-primary" onclick="cargarVentasMensualesFiltradas()">
+            <i class="fas fa-filter"></i>
+            Aplicar Filtro
+          </button>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">
+              <i class="fas fa-shopping-bag"></i>
+              Resultados de Compras
+            </h2>
+          </div>
+          <div class="card-body">
+            <div class="table-container">
+              <table class="table" id="tabla-compras">
+                <thead>
+                  <tr></tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sales Tab -->
+      <div class="tab-content" id="sales">
+        <h1 class="page-title">Historial de Ventas</h1>
+        <p class="page-subtitle">Seguimiento y análisis de todas las ventas realizadas</p>
+
+        <div class="filter-section">
+          <button class="btn btn-primary" onclick="cargarHistorialVentas()">
+            <i class="fas fa-history"></i>
+            Ver Todo el Historial
+          </button>
+          <label>Filtrar por mes:</label>
+          <input type="month" id="mes_historial" class="form-input" style="width: auto;">
+          <button class="btn btn-sm btn-primary" onclick="cargarHistorialVentasFiltrado()">
+            <i class="fas fa-filter"></i>
+            Filtrar
+          </button>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">
+              <i class="fas fa-receipt"></i>
+              Historial de Ventas
+            </h2>
+          </div>
+          <div class="card-body">
+            <div class="table-container">
+              <table class="table" id="tabla-ventas">
+                <thead>
+                  <tr></tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
-
-      
-
-  <div id="toast-container"></div>
 
   <!-- Scripts -->
   <script src="js/main.js"></script>
